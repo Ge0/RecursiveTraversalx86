@@ -9,6 +9,9 @@ class BinaryBlockDisassembler;
 class BinaryBlock {
 public:
 	BinaryBlock(const int64_t& address = 0, size_t length = 0);
+	BinaryBlock(const BinaryBlock&); // Copy constructor
+	
+	bool operator==(const BinaryBlock&) const;
 	
 	inline const int64_t& address() const {
 		return m_address;
