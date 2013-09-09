@@ -15,7 +15,7 @@ public:
 	
 	void addSymbol(long symbol);
 	
-	virtual void getDisassembled(const BinaryBlockDisassembler&);
+	virtual void getDisassembled(const BinaryBlockDisassembler&) const;
 	
 private:
 	std::set<long> m_symbols;

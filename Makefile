@@ -12,7 +12,8 @@ else
 	EXE = rectrav_x86
 endif
 
-SRC = 	src/BinaryBlock.cpp \
+SRC =	src/BinaryBlock.cpp \
+		src/BinaryBlockDisassembler.cpp \
 		src/BinaryCodeBlock.cpp \
 		src/BinaryDataBlock.cpp \
 		src/Instruction.cpp \

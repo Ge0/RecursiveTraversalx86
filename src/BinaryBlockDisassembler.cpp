@@ -5,10 +5,10 @@
 
 BinaryBlockDisassembler::BinaryBlockDisassembler() {}
 
-void BinaryBlockDisassembler::disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock) {
+void BinaryBlockDisassembler::disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock) const {
 	//TODO: output decoded instructions into a stream
 }
 
-void BinaryBlockDisassembler::disassembleDataCodeBlock(const BinaryDataBlock& binaryDataBlock) {
+void BinaryBlockDisassembler::disassembleBinaryDataBlock(const BinaryDataBlock& binaryDataBlock) const {
 	//TODO: output decoded instructions into a stream
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="RecursiveTraversalx86" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="src\;includes\;" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/RecursiveTraversalx86" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/RecursiveTraversalx86" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="include/BinaryBlock.hpp">
+			<Option virtualFolder="includes/" />
+		</Unit>
+		<Unit filename="include/BinaryCodeBlock.hpp">
+			<Option virtualFolder="includes/" />
+		</Unit>
+		<Unit filename="include/BinaryDataBlock.hpp">
+			<Option virtualFolder="includes/" />
+		</Unit>
+		<Unit filename="include/FlowInstruction.hpp">
+			<Option virtualFolder="includes/" />
+		</Unit>
+		<Unit filename="include/HijackFlowInstruction.hpp">
+			<Option virtualFolder="includes/" />
+		</Unit>
+		<Unit filename="include/Instruction.hpp">
+			<Option virtualFolder="includes/" />
+		</Unit>
+		<Unit filename="include/ReferencingInstruction.hpp">
+			<Option virtualFolder="includes/" />
+		</Unit>
+		<Unit filename="src/BinaryBlock.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/BinaryCodeBlock.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/BinaryDataBlock.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/FlowInstruction.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/HijackFlowInstruction.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/Instruction.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/ReferencingInstruction.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

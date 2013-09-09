@@ -16,7 +16,7 @@ public:
 		return m_granularity;
 	}
 	
-	virtual void getDisassembled(const BinaryBlockDisassembler&);
+	virtual void getDisassembled(const BinaryBlockDisassembler&) const;
 
 private:
 	Granularity m_granularity;

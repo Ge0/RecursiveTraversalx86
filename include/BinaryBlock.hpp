@@ -21,7 +21,7 @@ public:
 		return m_length;
 	}
 	
-	virtual void getDisassembled(const BinaryBlockDisassembler&) = 0;
+	virtual void getDisassembled(const BinaryBlockDisassembler&) const = 0;
 	
 	void setAddress(const int64_t& address);
 	void setLength(size_t length);

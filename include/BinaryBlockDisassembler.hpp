@@ -6,8 +6,9 @@ class BinaryDataBlock;
 
 class BinaryBlockDisassembler {
 public:
-	void disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock);
-	void disassembleBinaryDataBlock(const BinaryDataBlock& binaryDataBlock);
+	BinaryBlockDisassembler();
+	void disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock) const;
+	void disassembleBinaryDataBlock(const BinaryDataBlock& binaryDataBlock) const;
 private:
 
 };
