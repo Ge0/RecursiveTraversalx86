@@ -16,6 +16,7 @@ SRC =	src/BinaryBlock.cpp \
 		src/BinaryBlockDisassembler.cpp \
 		src/BinaryCodeBlock.cpp \
 		src/BinaryDataBlock.cpp \
+		src/BinaryRegion.cpp \
 		src/Instruction.cpp \
 		src/ReferencingInstruction.cpp \
 		src/FlowInstruction.cpp \

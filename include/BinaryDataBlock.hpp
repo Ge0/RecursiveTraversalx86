@@ -23,4 +23,4 @@ private:
 	
 };
 
-#endif
+#endif /* _DATA_CODE_BLOCK_HPP_ */
