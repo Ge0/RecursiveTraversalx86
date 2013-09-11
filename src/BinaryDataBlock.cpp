@@ -1,5 +1,5 @@
 #include "BinaryDataBlock.hpp"
-#include "BinaryBlockDisassembler.hpp"
+#include "AbstractBinaryBlockDisassembler.hpp"
 
 BinaryDataBlock::BinaryDataBlock(const int64_t& address, size_t length)
 	 : BinaryBlock(address, length)
@@ -7,6 +7,6 @@ BinaryDataBlock::BinaryDataBlock(const int64_t& address, size_t length)
 
 }
 
-void BinaryDataBlock::getDisassembled(const BinaryBlockDisassembler& disassembler) const {
+void BinaryDataBlock::getDisassembled(const AbstractBinaryBlockDisassembler& disassembler) const {
 	disassembler.disassembleBinaryDataBlock(*this);
 }

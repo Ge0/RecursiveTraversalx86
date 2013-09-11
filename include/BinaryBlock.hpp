@@ -4,7 +4,7 @@
 #include <cstdio>
 #include <cstdint>
 
-class BinaryBlockDisassembler;
+class AbstractBinaryBlockDisassembler;
 
 class BinaryBlock {
 public:
@@ -21,7 +21,7 @@ public:
 		return m_length;
 	}
 	
-	virtual void getDisassembled(const BinaryBlockDisassembler&) const = 0;
+	virtual void getDisassembled(const AbstractBinaryBlockDisassembler&) const = 0;
 	
 	void setAddress(const int64_t& address);
 	void setLength(size_t length);

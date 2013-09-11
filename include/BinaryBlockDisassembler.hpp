@@ -1,14 +1,13 @@
 #ifndef _BINARY_BLOC_DISASSEMBLER_HPP_
 #define _BINARY_BLOC_DISASSEMBLER_HPP_
 
-class BinaryCodeBlock;
-class BinaryDataBlock;
+#include "AbstractBinaryBlockDisassembler.hpp"
 
-class BinaryBlockDisassembler {
+class BinaryBlockDisassembler : public AbstractBinaryBlockDisassembler {
 public:
 	BinaryBlockDisassembler();
-	void disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock) const;
-	void disassembleBinaryDataBlock(const BinaryDataBlock& binaryDataBlock) const;
+	virtual void disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock) const;
+	virtual void disassembleBinaryDataBlock(const BinaryDataBlock& binaryDataBlock) const;
 private:
 
 };
