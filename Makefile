@@ -50,7 +50,6 @@ Release: target
 ###################
 $(TEST_REGSPLIT): $(OBJ) tests/region_split.o
 	$(CC) tests/region_split.o $(OBJ) -o $(TEST_REGSPLIT) 
-	s
 # Target
 tests/region_split.o:
 	$(CC) -c tests/region_split.cpp -o tests/region_split.o -I$(INCLUDE_PATH) $(COMPILER_FLAGS)
