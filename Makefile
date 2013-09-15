@@ -1,8 +1,9 @@
 CC = g++ 
-INCLUDE_PATH = ./include
-COMPILER_FLAGS = -std=c++0x
-RELEASE_FLAGS = -O3s
-
+INCLUDE_PATH        = ./include
+COMPILER_FLAGS      = -std=c++0x
+RELEASE_FLAGS       = -O3s
+LIBASM_PATH         = ./lib/libdasm/bin
+LIBASM_INCLUDE_PATH = ./lib/libdasm/inc
 # I r windows guy... :o)
 ifeq ($(OS),Windows_NT)
 	RM = @del
@@ -49,10 +50,11 @@ Release: target
 # UNIT TEST START #
 ###################
 $(TEST_REGSPLIT): $(OBJ) tests/region_split.o
-	$(CC) tests/region_split.o $(OBJ) -o $(TEST_REGSPLIT) 
+	$(CC) tests/region_split.o $(OBJ) -o $(TEST_REGSPLIT) L$(LIBASM_PATH) -ldasm
+	
 # Target
 tests/region_split.o:
-	$(CC) -c tests/region_split.cpp -o tests/region_split.o -I$(INCLUDE_PATH) $(COMPILER_FLAGS)
+	$(CC) -c tests/region_split.cpp -o tests/region_split.o -I$(INCLUDE_PATH) -I$(LIBASM_INCLUDE_PATH) $(COMPILER_FLAGS)
 ###################
 # UNIT TEST END   #
 ###################
@@ -62,13 +64,13 @@ tests/region_split.o:
 # MAIN START      #
 ###################
 src/main.o:
-	$(CC) -c src/main.cpp -o src/main.o -I$(INCLUDE_PATH) $(COMPILER_FLAGS)
+	$(CC) -c src/main.cpp -o src/main.o -I$(INCLUDE_PATH) -I$(LIBASM_INCLUDE_PATH) $(COMPILER_FLAGS)
 
 target: $(OBJ) src/main.o
-	$(CC) $(OBJ) src/main.o -o $(EXE)
+	$(CC) $(OBJ) src/main.o -o $(EXE) -L$(LIBASM_PATH) -ldasm
 	
 %.o: %.cpp
-	$(CC) $(COMPILER_FLAGS) -c $< -I$(INCLUDE_PATH) -o $@
+	$(CC) $(COMPILER_FLAGS) -c $< -I$(INCLUDE_PATH) -I$(LIBASM_INCLUDE_PATH) -o $@
 ###################
 # MAIN END        #
 ###################
