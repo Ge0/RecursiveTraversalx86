@@ -14,6 +14,8 @@ public:
 	
 	void setReferencedAddress(const int64_t& referenced_address);
 	
+	virtual void getExecuted(AbstractInstructionProcessor&);
+	
 protected:
 	int64_t m_referencedAddress;
 };

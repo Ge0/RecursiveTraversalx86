@@ -22,11 +22,11 @@ SRC =	src/BinaryBlock.cpp \
 		src/BinaryCodeBlock.cpp \
 		src/BinaryDataBlock.cpp \
 		src/BinaryRegion.cpp \
-		src/Instruction.cpp \
-		src/ReferencingInstruction.cpp \
 		src/FlowInstruction.cpp \
 		src/HijackFlowInstruction.cpp \
-		
+		src/Instruction.cpp \
+		src/RecursiveTraversalInstructionProcessor.cpp \
+		src/ReferencingInstruction.cpp
 		
 OBJ = $(SRC:.cpp=.o)
 

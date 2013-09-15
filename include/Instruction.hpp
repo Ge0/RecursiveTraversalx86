@@ -3,6 +3,8 @@
 
 #include <cstdio>
 
+class AbstractInstructionProcessor;
+
 class Instruction {
 public:
 	Instruction(size_t length = 0);
@@ -12,6 +14,8 @@ public:
 	}
 	
 	void setLength(size_t length);
+	
+	virtual void getExecuted(AbstractInstructionProcessor&);
 	
 protected:
 	size_t m_length;
