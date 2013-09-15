@@ -2,6 +2,7 @@
 #define _RECURSIVE_TRAVERSAL_PROCESSOR_INSTRUCTION_HPP_
 
 #include "AbstractInstructionProcessor.hpp"
+#include <cstdint>
 #include <stack>
 
 class RecursiveTraversalInstructionProcessor : public AbstractInstructionProcessor {
