@@ -1,7 +1,8 @@
 #ifndef _BINARY_REGION_HPP_
 #define _BINARY_REGION_HPP_
 
-#include <cstdio>
+
+#include <stdio.h>
 #include <cstdint>
 
 class BinaryRegion {

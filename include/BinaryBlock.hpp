@@ -1,8 +1,8 @@
 #ifndef _BINARYBLOCK_HPP_
 #define _BINARYBLOCK_HPP_
 
-#include <cstdio>
 #include <cstdint>
+#include <stdio.h>
 
 class AbstractBinaryBlockDisassembler;
 

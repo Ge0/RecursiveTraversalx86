@@ -50,7 +50,7 @@ Release: target
 # UNIT TEST START #
 ###################
 $(TEST_REGSPLIT): $(OBJ) tests/region_split.o
-	$(CC) tests/region_split.o $(OBJ) -o $(TEST_REGSPLIT) L$(LIBASM_PATH) -ldasm
+	$(CC) tests/region_split.o $(OBJ) -o $(TEST_REGSPLIT) -L$(LIBASM_PATH) -ldasm
 	
 # Target
 tests/region_split.o:
