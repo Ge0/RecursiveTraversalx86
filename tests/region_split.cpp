@@ -7,6 +7,7 @@
 #include "Instruction.hpp"
 #include "BinaryBlock.hpp"
 #include "BinaryRegion.hpp"
+#include "RecursiveTraversalInstructionProcessor.hpp"
 
 //#include <libdasm.h>
 
@@ -31,31 +32,34 @@ int main(int argc, char** argv) {
 }
 
 void analyze_binary_region(const BinaryRegion& binaryRegion, std::set<BinaryBlock*>& binaryBlocks) {
-	int64_t current_memory_address = binaryRegion.baseAddress() + binaryRegion.entryPointOffset();
+	RecursiveTraversalInstructionProcessor processor(
+		&binaryRegion, binaryRegion.baseAddress() + binaryRegion.entryPointOffset());
 	
 	// The current_memory_address should not be into any pre-existing binary block
-	if(is_address_within_blocks(current_memory_address, binaryBlocks)) {
+	if(is_address_within_blocks(processor.currentAddress(), binaryBlocks)) {
 		return;
 	}
 	
-	std::stack<int64_t> stack_disass_addresses;
-	stack_disass_addresses.push(current_memory_address);
+	processor.pushAddressToDisassemble(processor.currentAddress());
 	
 	while(1) {
 		// Empty stack? End.
-		if(stack_disass_addresses.empty()) {
+		if(processor.addressesToDisassemble().empty()) {
 			break;
 		}
 		
+		// Get last address to disassemble
+		processor.setCurrentAddressToDisassemble(processor.popLastAddressToDisassemble());
+		
 		// if our address doesn't overlays any block and is within the binary region, keep disassembling
-		while(!is_address_within_blocks(current_memory_address, binaryBlocks) && 
-			is_address_within_binary_region(binaryRegion,current_memory_address))
+		while(!is_address_within_blocks(processor.currentAddress(), binaryBlocks) && 
+			is_address_within_binary_region(binaryRegion,processor.currentAddress()))
 		{
-			Instruction* inst = my_disass_function(binaryRegion, current_memory_address);
+			Instruction* inst = my_disass_function(binaryRegion, processor.currentAddress());
 			
 			// According to the instruction type, need to do something
 			
-			current_memory_address += inst->length();
+			processor.incrementCurrentAddress(inst->length());
 			
 			delete inst;
 			
@@ -66,10 +70,7 @@ void analyze_binary_region(const BinaryRegion& binaryRegion, std::set<BinaryBloc
 	
 }
 
-Instruction* my_disass_function(const BinaryRegion& binaryRegion, const int64_t& address) {
-	// ...
-	return new Instruction;
-}
+
 
 bool is_address_within_binary_region(const BinaryRegion& binaryRegion, const int64_t& address) {
 	return address >= binaryRegion.baseAddress() && address <= binaryRegion.baseAddress() + binaryRegion.contentSize();

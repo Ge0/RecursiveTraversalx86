@@ -49,12 +49,14 @@ Release: target
 ###################
 # UNIT TEST START #
 ###################
-$(TEST_REGSPLIT): $(OBJ) tests/region_split.o
-	$(CC) tests/region_split.o $(OBJ) -o $(TEST_REGSPLIT) -L$(LIBASM_PATH) -ldasm
+$(TEST_REGSPLIT): $(OBJ) tests/region_split.o tests/disass_x86.o
+	$(CC) tests/region_split.o tests/disass_x86.o $(OBJ) -o $(TEST_REGSPLIT) -L$(LIBASM_PATH) -ldasm
 	
 # Target
-tests/region_split.o:
+tests/region_split.o: 
 	$(CC) -c tests/region_split.cpp -o tests/region_split.o -I$(INCLUDE_PATH) -I$(LIBASM_INCLUDE_PATH) $(COMPILER_FLAGS)
+tests/disass_x86.o:
+	$(CC) -c tests/disass_x86.cpp -o tests/disass_x86.o -I$(INCLUDE_PATH) -I$(LIBASM_INCLUDE_PATH) $(COMPILER_FLAGS)
 ###################
 # UNIT TEST END   #
 ###################
