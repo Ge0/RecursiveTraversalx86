@@ -4,6 +4,7 @@ COMPILER_FLAGS      = -std=c++0x
 RELEASE_FLAGS       = -O3s
 LIBASM_PATH         = ./lib/libdasm/bin
 LIBASM_INCLUDE_PATH = ./lib/libdasm/inc
+
 # I r windows guy... :o)
 ifeq ($(OS),Windows_NT)
 	RM = @del

@@ -16,4 +16,5 @@ namespace RecursiveTraversal {
 	void Instruction::getExecuted(AbstractInstructionProcessor& instructionProcessor) {
 		instructionProcessor.processInstruction(*this);
 	}
+
 }

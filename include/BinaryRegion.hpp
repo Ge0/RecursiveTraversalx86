@@ -32,6 +32,7 @@ namespace RecursiveTraversal {
 		void setBaseAddress(const int64_t& address);
 		void setEntryPointOffset(const uint64_t& entry_point_offset);
 		void setContent(const char* content, size_t content_size);
+		bool hasAddress(const int64_t& address) const; 
 		
 	private:
 		/* Private methods */

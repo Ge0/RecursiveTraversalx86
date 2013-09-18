@@ -25,4 +25,8 @@ namespace RecursiveTraversal {
 		m_length = length;
 	}
 	
+	void BinaryBlock::incrementLength(size_t offset) {
+		m_length += offset;
+	}
+	
 }

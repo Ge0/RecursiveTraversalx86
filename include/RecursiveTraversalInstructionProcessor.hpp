@@ -15,6 +15,7 @@ namespace RecursiveTraversal {
 	class RecursiveTraversalInstructionProcessor : public AbstractInstructionProcessor {
 	public:
 		RecursiveTraversalInstructionProcessor(const BinaryRegion* const& = NULL, const int64_t& = 0);
+		virtual ~RecursiveTraversalInstructionProcessor();
 		
 		virtual void processInstruction(const Instruction&);
 		virtual void processReferencingInstruction(const ReferencingInstruction&);
@@ -45,6 +46,10 @@ namespace RecursiveTraversal {
 		void setBinaryBlocks(std::set<BinaryBlock*>* const& binary_blocks);
 		int64_t popLastAddressToDisassemble();
 	private:
+	
+		bool isAddressWithinBlocks(const int64_t& address) const;
+	
+		BinaryBlock* m_currentBinaryBlock;
 		const BinaryRegion* m_binaryRegion;
 		std::stack<int64_t> m_addressesToDisassemble;
 		std::set<BinaryBlock*>* m_binaryBlocks;

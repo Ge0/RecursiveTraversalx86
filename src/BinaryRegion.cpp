@@ -56,5 +56,9 @@ namespace RecursiveTraversal {
 		::memcpy(m_content, content, content_size);
 		m_contentSize = content_size;
 	}
+	
+	bool BinaryRegion::hasAddress(const int64_t& address) const {
+		return m_baseAddress <= address && m_baseAddress + m_contentSize >= m_baseAddress;
+	}
 
 }

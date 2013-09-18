@@ -27,6 +27,7 @@ namespace RecursiveTraversal {
 		
 		void setAddress(const int64_t& address);
 		void setLength(size_t length);
+		void incrementLength(size_t offset);
 		
 	protected:
 		int64_t m_address;
