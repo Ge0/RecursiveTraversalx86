@@ -1,8 +1,9 @@
 #include <cstdlib>
 #include <set>
 #include <stack>
-
 #include <iostream>
+
+#include "disass_x86.hpp"
 
 #include "Instruction.hpp"
 #include "BinaryBlock.hpp"
@@ -11,8 +12,6 @@
 
 //#include <libdasm.h>
 namespace RT = RecursiveTraversal;
-
-RT::Instruction* my_disass_function(const RT::BinaryRegion& binaryRegion, const int64_t& address);
 
 bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*>& binaryBlocks);
 
@@ -24,19 +23,23 @@ int main(int argc, char** argv) {
 	RT::BinaryRegion binaryRegion(
 		0x00400000,	/* Base address */
 		0,			/* Entry point offset */
-		"\x50\x8B\xD9\xEB\x01\xDE\x83\xF2\x43",
+		"\x50\x8B\xD9\xEB\x06\xDE\x83\xF2\x43",
 		9
 	);
+	std::set<RT::BinaryBlock*> binaryBlocks;
+	//my_disass_function(binaryRegion, 0);
+	analyze_binary_region(binaryRegion, binaryBlocks);
 	
-	my_disass_function(binaryRegion, 0);
 	
 	return EXIT_SUCCESS;
 	
 }
 
 void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::BinaryBlock*>& binaryBlocks) {
+
 	RT::RecursiveTraversalInstructionProcessor processor(
-		&binaryRegion, binaryRegion.baseAddress() + binaryRegion.entryPointOffset());
+		&binaryRegion, binaryRegion.baseAddress() + binaryRegion.entryPointOffset()
+	);
 	
 	// The current_memory_address should not be into any pre-existing binary block
 	if(is_address_within_blocks(processor.currentAddress(), binaryBlocks)) {
@@ -61,6 +64,7 @@ void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::Bi
 			RT::Instruction* inst = my_disass_function(binaryRegion, processor.currentAddress());
 			
 			// According to the instruction type, need to do something
+			inst->getExecuted(processor);
 			
 			processor.incrementCurrentAddress(inst->length());
 			

@@ -2,9 +2,11 @@
 #define _RECURSIVE_TRAVERSAL_PROCESSOR_INSTRUCTION_HPP_
 
 #include "AbstractInstructionProcessor.hpp"
+#include "BinaryBlock.hpp"
 #include <stdio.h>
 #include <cstdint>
 #include <stack>
+#include <set>
 
 namespace RecursiveTraversal {
 
@@ -33,13 +35,19 @@ namespace RecursiveTraversal {
 			return m_addressesToDisassemble;
 		}
 		
+		inline const std::set<BinaryBlock*>* binaryBlocks() const {
+			return m_binaryBlocks;
+		}
+		
 		void incrementCurrentAddress(int offset);
 		void setCurrentAddressToDisassemble(const int64_t&);
-		void setBinaryRegion(const BinaryRegion* const& binaryRegion);
+		void setBinaryRegion(const BinaryRegion* const& binary_region);
+		void setBinaryBlocks(std::set<BinaryBlock*>* const& binary_blocks);
 		int64_t popLastAddressToDisassemble();
 	private:
 		const BinaryRegion* m_binaryRegion;
 		std::stack<int64_t> m_addressesToDisassemble;
+		std::set<BinaryBlock*>* m_binaryBlocks;
 		int64_t m_currentAddress;
 	};
 }

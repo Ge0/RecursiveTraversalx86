@@ -31,12 +31,16 @@ namespace RecursiveTraversal {
 		m_addressesToDisassemble.push(address);
 	}
 
-	void RecursiveTraversalInstructionProcessor::setBinaryRegion(const BinaryRegion* const& binaryRegion) {
-		m_binaryRegion = binaryRegion;
+	void RecursiveTraversalInstructionProcessor::setBinaryRegion(const BinaryRegion* const& binary_region) {
+		m_binaryRegion = binary_region;
 	}
 
 	void RecursiveTraversalInstructionProcessor::incrementCurrentAddress(int offset) {
 		m_currentAddress += offset;
+	}
+	
+	void RecursiveTraversalInstructionProcessor::setBinaryBlocks(std::set<BinaryBlock*>* const& binary_blocks) {
+		m_binaryBlocks = binary_blocks;
 	}
 
 	int64_t RecursiveTraversalInstructionProcessor::popLastAddressToDisassemble() {
