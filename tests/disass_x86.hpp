@@ -3,9 +3,11 @@
 
 #include "BinaryRegion.hpp"
 #include "Instruction.hpp"
+#include <libdasm.h>
 
+namespace RT = RecursiveTraversal;
 
-Instruction* my_disass_function(const BinaryRegion& binaryRegion, const int64_t& address);
+RT::Instruction* my_disass_function(const RT::BinaryRegion& binaryRegion, const int64_t& address);
 
 
 #endif /* _DISASSX86_HPP_ */

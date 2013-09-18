@@ -1,13 +1,16 @@
 #ifndef _ABSTRACT_BINARY_BLOCK_DISASSEMBLER_HPP_
 #define _ABSTRACT_BINARY_BLOCK_DISASSEMBLER_HPP_
 
-class BinaryCodeBlock;
-class BinaryDataBlock;
+namespace RecursiveTraversal {
 
-class AbstractBinaryBlockDisassembler {
-public:
-	virtual void disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock) const = 0;
-	virtual void disassembleBinaryDataBlock(const BinaryDataBlock& binaryDataBlock) const = 0;
-};
+	class BinaryCodeBlock;
+	class BinaryDataBlock;
+
+	class AbstractBinaryBlockDisassembler {
+	public:
+		virtual void disassembleBinaryCodeBlock(const BinaryCodeBlock& binaryCodeBlock) const = 0;
+		virtual void disassembleBinaryDataBlock(const BinaryDataBlock& binaryDataBlock) const = 0;
+	};
+}
 
 #endif /* _ABSTRACT_BINARY_BLOCK_DISASSEMBLER_HPP_ */

@@ -4,23 +4,26 @@
 #include <cstdio>
 #include "BinaryBlock.hpp"
 
-class BinaryDataBlock : public BinaryBlock {
+namespace RecursiveTraversal {
 
-public:
+	class BinaryDataBlock : public BinaryBlock {
 
-	enum Granularity { Byte = 1, Word = 2, Dword = 4, Qword = 8 };
+	public:
 
-	BinaryDataBlock(const int64_t& address, size_t length);
-	
-	inline Granularity granularity() const {
-		return m_granularity;
-	}
-	
-	virtual void getDisassembled(const AbstractBinaryBlockDisassembler&) const;
+		enum Granularity { Byte = 1, Word = 2, Dword = 4, Qword = 8 };
 
-private:
-	Granularity m_granularity;
-	
-};
+		BinaryDataBlock(const int64_t& address, size_t length);
+		
+		inline Granularity granularity() const {
+			return m_granularity;
+		}
+		
+		virtual void getDisassembled(const AbstractBinaryBlockDisassembler&) const;
 
+	private:
+		Granularity m_granularity;
+		
+	};
+
+}
 #endif /* _DATA_CODE_BLOCK_HPP_ */
