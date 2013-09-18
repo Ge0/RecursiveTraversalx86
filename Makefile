@@ -2,7 +2,7 @@ CC = g++
 INCLUDE_PATH        = ./include
 COMPILER_FLAGS      = -std=c++0x
 RELEASE_FLAGS       = -O3s
-LIBASM_PATH         = ./lib/libdasm/bin
+
 LIBASM_INCLUDE_PATH = ./lib/libdasm/inc
 # I r windows guy... :o)
 ifeq ($(OS),Windows_NT)
@@ -10,10 +10,12 @@ ifeq ($(OS),Windows_NT)
 	COMPILER_FLAGS += -DWIN32
 	EXE = rectrav_x86.exe
 	TEST_REGSPLIT = regsplit.exe
+	LIBASM_PATH   = ./lib/libdasm/bin/win32
 else
 	RM = @rm
 	EXE = rectrav_x86
 	TEST_REGSPLIT = regsplit
+	LIBASM_PATH   = ./lib/libdasm/bin/linux
 endif
 
 # Main sources
