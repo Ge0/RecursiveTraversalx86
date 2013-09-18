@@ -3,12 +3,14 @@
 
 #include "FlowInstruction.hpp"
 
-class HijackFlowInstruction : public FlowInstruction {
-public:
-	HijackFlowInstruction(size_t length = 0, const int64_t& referenced_address = 0);
-	
-	virtual void getExecuted(AbstractInstructionProcessor&);
-	
-};
+namespace RecursiveTraversal {
+	class HijackFlowInstruction : public FlowInstruction {
+	public:
+		HijackFlowInstruction(size_t length = 0, const int64_t& referenced_address = 0);
+		
+		virtual void getExecuted(AbstractInstructionProcessor&);
+		
+	};
+}
 
 #endif /* _HIJACK_FLOW_INSTRUCTION_HPP_ */

@@ -1,16 +1,19 @@
 #include "Instruction.hpp"
 #include "AbstractInstructionProcessor.hpp"
 
-Instruction::Instruction(size_t length)
-	: m_length(length)
-{
+namespace RecursiveTraversal {
 
-}
+	Instruction::Instruction(size_t length)
+		: m_length(length)
+	{
 
-void Instruction::setLength(size_t length) {
-	m_length = length;
-}
+	}
 
-void Instruction::getExecuted(AbstractInstructionProcessor& instructionProcessor) {
-	instructionProcessor.processInstruction(*this);
+	void Instruction::setLength(size_t length) {
+		m_length = length;
+	}
+
+	void Instruction::getExecuted(AbstractInstructionProcessor& instructionProcessor) {
+		instructionProcessor.processInstruction(*this);
+	}
 }
