@@ -11,11 +11,16 @@ namespace RecursiveTraversal {
 
 	class AbstractInstructionProcessor {
 	public:
+		virtual ~AbstractInstructionProcessor() { };
 		virtual void processInstruction(const Instruction&) = 0;
 		virtual void processReferencingInstruction(const ReferencingInstruction&) = 0;
 		virtual void processFlowInstruction(const FlowInstruction&) = 0;
 		virtual void processHijackFlowInstruction(const HijackFlowInstruction&) = 0;
 	};
+<<<<<<< HEAD
+
+};
+=======
 }
 =======
 
@@ -37,5 +42,6 @@ namespace RecursiveTraversal {
 
 
 >>>>>>> origin/Ge0
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 
 #endif /* _INSTRUCTION_PROCESSOR_HPP_ */

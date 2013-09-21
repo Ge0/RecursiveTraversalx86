@@ -16,9 +16,14 @@ namespace RecursiveTraversal {
 	public:
 		RecursiveTraversalInstructionProcessor(const BinaryRegion* const& = NULL, const int64_t& = 0);
 <<<<<<< HEAD
+		virtual ~RecursiveTraversalInstructionProcessor();
+
+=======
+<<<<<<< HEAD
 =======
 		virtual ~RecursiveTraversalInstructionProcessor();
 >>>>>>> origin/Ge0
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 		
 		virtual void processInstruction(const Instruction&);
 		virtual void processReferencingInstruction(const ReferencingInstruction&);
@@ -40,13 +45,31 @@ namespace RecursiveTraversal {
 		}
 		
 <<<<<<< HEAD
+				inline const std::set<BinaryBlock*>* binaryBlocks() const {
+			return m_binaryBlocks;
+		}
+		
+		void fillBinaryBlocks();
+=======
+<<<<<<< HEAD
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 		void incrementCurrentAddress(int offset);
 		void setCurrentAddressToDisassemble(const int64_t&);
 		void setBinaryRegion(const BinaryRegion* const& binaryRegion);
+		void setBinaryBlocks(std::set<BinaryBlock*>* const& binary_blocks);
 		int64_t popLastAddressToDisassemble();
+		
+		
 	private:
+	
+		bool isAddressWithinBlocks(const int64_t& address) const;
+	
+		BinaryBlock* m_currentBinaryBlock;
 		const BinaryRegion* m_binaryRegion;
 		std::stack<int64_t> m_addressesToDisassemble;
+<<<<<<< HEAD
+		std::set<BinaryBlock*>* m_binaryBlocks;
+=======
 =======
 		inline const std::set<BinaryBlock*>* binaryBlocks() const {
 			return m_binaryBlocks;
@@ -69,6 +92,7 @@ namespace RecursiveTraversal {
 		std::stack<int64_t> m_addressesToDisassemble;
 		std::set<BinaryBlock*>* m_binaryBlocks;
 >>>>>>> origin/Ge0
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 		int64_t m_currentAddress;
 	};
 }

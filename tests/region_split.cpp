@@ -24,8 +24,13 @@ bool is_address_within_binary_region(const RT::BinaryRegion& binaryRegion, const
 
 void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::BinaryBlock*>& binaryBlocks);
 
+void dump_binary_blocks(const std::set<RT::BinaryBlock*>& binary_blocks);
+
 int main(int argc, char** argv) {
 	RT::BinaryRegion binaryRegion(
+<<<<<<< HEAD
+		0x00000000,	/* Base address */
+=======
 		0x00400000,	/* Base address */
 =======
 bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*>& binaryBlocks);
@@ -40,6 +45,7 @@ int main(int argc, char** argv) {
 	RT::BinaryRegion binaryRegion(
 		0x00000000,	/* Base address */
 >>>>>>> origin/Ge0
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 		0,			/* Entry point offset */
 		"\x50\x8B\xD9\xEB\x01\xDE\x83\xF2\x43",
 		9
@@ -89,11 +95,23 @@ void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::Bi
 			is_address_within_binary_region(binaryRegion,processor.currentAddress()))
 		{
 <<<<<<< HEAD
+			std::cout << "Current address: " << processor.currentAddress() << std::endl;
+
+=======
+<<<<<<< HEAD
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 			RT::Instruction* inst = my_disass_function(binaryRegion, processor.currentAddress());
 =======
 			std::cout << "Current address: " << processor.currentAddress() << std::endl;
 >>>>>>> origin/Ge0
 			
+<<<<<<< HEAD
+			std::cout << "Length: " << inst->length() << std::endl;
+			
+			// According to the instruction type, need to do something
+			inst->getExecuted(processor);
+			
+=======
 			RT::Instruction* inst = my_disass_function(binaryRegion, processor.currentAddress());
 			
 			std::cout << "Length: " << inst->length() << std::endl;
@@ -101,6 +119,7 @@ void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::Bi
 			// According to the instruction type, need to do something
 			inst->getExecuted(processor);
 			
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 			delete inst;
 		}
 		
@@ -115,10 +134,15 @@ void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::Bi
 
 bool is_address_within_binary_region(const RT::BinaryRegion& binaryRegion, const int64_t& address) {
 <<<<<<< HEAD
+	return address >= binaryRegion.baseAddress() && address < binaryRegion.baseAddress() + binaryRegion.contentSize();
+
+=======
+<<<<<<< HEAD
 	return address >= binaryRegion.baseAddress() && address <= binaryRegion.baseAddress() + binaryRegion.contentSize();
 =======
 	return address >= binaryRegion.baseAddress() && address < binaryRegion.baseAddress() + binaryRegion.contentSize();
 >>>>>>> origin/Ge0
+>>>>>>> dcc8ea13477788d040e73151effc66035508c838
 }
 
 bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*>& binaryBlocks) {
