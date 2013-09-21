@@ -14,15 +14,7 @@ namespace RecursiveTraversal {
 		BinaryBlock(const BinaryBlock&); // Copy constructor
 		
 		bool operator==(const BinaryBlock&) const;
-<<<<<<< HEAD
 		bool operator<(const BinaryBlock&) const;
-=======
-<<<<<<< HEAD
-=======
-		bool operator<(const BinaryBlock&) const;
->>>>>>> origin/Ge0
->>>>>>> dcc8ea13477788d040e73151effc66035508c838
-		
 		inline const int64_t& address() const {
 			return m_address;
 		}
@@ -35,15 +27,8 @@ namespace RecursiveTraversal {
 		
 		void setAddress(const int64_t& address);
 		void setLength(size_t length);
-<<<<<<< HEAD
 		void incrementLength(size_t offset);
-=======
-<<<<<<< HEAD
-=======
-		void incrementLength(size_t offset);
->>>>>>> origin/Ge0
-		
->>>>>>> dcc8ea13477788d040e73151effc66035508c838
+
 	protected:
 		int64_t m_address;
 		size_t m_length;

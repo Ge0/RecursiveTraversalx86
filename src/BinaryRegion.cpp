@@ -56,18 +56,9 @@ namespace RecursiveTraversal {
 		::memcpy(m_content, content, content_size);
 		m_contentSize = content_size;
 	}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> dcc8ea13477788d040e73151effc66035508c838
-	
+
 	bool BinaryRegion::hasAddress(const int64_t& address) const {
 		return m_baseAddress <= address && m_baseAddress + m_contentSize >= m_baseAddress;
 	}
-<<<<<<< HEAD
-=======
->>>>>>> origin/Ge0
->>>>>>> dcc8ea13477788d040e73151effc66035508c838
 
 }
