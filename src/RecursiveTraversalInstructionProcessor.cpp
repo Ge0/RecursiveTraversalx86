@@ -1,7 +1,9 @@
 #include "RecursiveTraversalInstructionProcessor.hpp"
-#include "HijackFlowInstruction.hpp"
+
 #include "BinaryCodeBlock.hpp"
+#include "BinaryDataBlock.hpp"
 #include "BinaryRegion.hpp"
+#include "HijackFlowInstruction.hpp"
 
 #include <iostream>
 
@@ -52,8 +54,9 @@ namespace RecursiveTraversal {
 		// if the destination address hasn't been analysed yet, start a new block
 		std::cout << "Referenced Address:" << instruction.referencedAddress() << std::endl;
 		if(!isAddressWithinBlocks(instruction.referencedAddress())) {
+			std::cout << "Insert a new block." << std::endl;
 			m_binaryBlocks->insert(m_currentBinaryBlock);
-			m_currentBinaryBlock = new BinaryCodeBlock(instruction.referencedAddress());
+			m_currentBinaryBlock = new BinaryCodeBlock(instruction.referencedAddress(), 0);
 			setCurrentAddressToDisassemble(instruction.referencedAddress());
 		}
 	}
@@ -100,5 +103,43 @@ namespace RecursiveTraversal {
 
 	void RecursiveTraversalInstructionProcessor::setCurrentAddressToDisassemble(const int64_t& address) {
 		m_currentAddress = address;
+	}
+	
+	void RecursiveTraversalInstructionProcessor::fillBinaryBlocks() {
+		// Insert the current block into the set
+		m_binaryBlocks->insert(m_currentBinaryBlock);
+		
+		std::cout << "There are " << m_binaryBlocks->size() << " blocks." << std::endl;
+		
+		if(m_binaryBlocks->size() > 1) {
+			
+			// fill the set with binary data blocks
+			std::set<BinaryBlock*>::const_iterator it_prev = m_binaryBlocks->begin(), it = it_prev;
+			++it;
+			
+			while(it != m_binaryBlocks->end()) {
+				std::cout << "prev block: " << (*it_prev)->address() << std::endl;
+				std::cout << "current: " << (*it)->address() << std::endl;
+			
+				// not contiguous?
+				if(((*it_prev)->address() + (*it_prev)->length()) != (*it)->address()) {
+					// Create a new binary data block that fits in
+					BinaryDataBlock* data_block = new BinaryDataBlock(
+						(*it_prev)->address() + (*it)->length(), // computed address
+						(*it)->address() - ((*it_prev)->address() + (*it_prev)->length()) // computed length
+					);
+					std::cout << "Before: " << (*it_prev)->address() << std::endl;
+					// Insert the block into the set
+					it_prev = m_binaryBlocks->insert(it_prev,data_block);
+					std::cout << "After: " << (*it_prev)->address() << std::endl;
+					// update the prev_it iterator so it points right to the new block
+					// ++it_prev;
+					++it;
+				}
+			
+				++it_prev;
+				++it;
+			}
+		}
 	}
 }

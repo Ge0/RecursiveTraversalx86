@@ -45,6 +45,9 @@ namespace RecursiveTraversal {
 		void setBinaryRegion(const BinaryRegion* const& binary_region);
 		void setBinaryBlocks(std::set<BinaryBlock*>* const& binary_blocks);
 		int64_t popLastAddressToDisassemble();
+		
+		void fillBinaryBlocks();
+		
 	private:
 	
 		bool isAddressWithinBlocks(const int64_t& address) const;

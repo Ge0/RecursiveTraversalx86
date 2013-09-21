@@ -14,6 +14,7 @@ namespace RecursiveTraversal {
 		BinaryBlock(const BinaryBlock&); // Copy constructor
 		
 		bool operator==(const BinaryBlock&) const;
+		bool operator<(const BinaryBlock&) const;
 		
 		inline const int64_t& address() const {
 			return m_address;

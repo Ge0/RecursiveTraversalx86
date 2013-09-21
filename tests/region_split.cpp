@@ -71,11 +71,16 @@ void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::Bi
 			
 			RT::Instruction* inst = my_disass_function(binaryRegion, processor.currentAddress());
 			
+			std::cout << "Length: " << inst->length() << std::endl;
+			
 			// According to the instruction type, need to do something
 			inst->getExecuted(processor);
 			
 			delete inst;
 		}
+		
+		// Register the last block
+		processor.fillBinaryBlocks();
 	}
 	
 	dump_binary_blocks(binaryBlocks);
@@ -84,7 +89,7 @@ void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::Bi
 
 
 bool is_address_within_binary_region(const RT::BinaryRegion& binaryRegion, const int64_t& address) {
-	return address >= binaryRegion.baseAddress() && address <= binaryRegion.baseAddress() + binaryRegion.contentSize();
+	return address >= binaryRegion.baseAddress() && address < binaryRegion.baseAddress() + binaryRegion.contentSize();
 }
 
 bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*>& binaryBlocks) {

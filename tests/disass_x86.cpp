@@ -4,7 +4,7 @@
 
 namespace RT = RecursiveTraversal;
 
-void compute_referenced_address(const INSTRUCTION& inst, RT::ReferencingInstruction* instruction);
+void compute_referenced_address(const INSTRUCTION& inst, const int64_t& base_address, RT::ReferencingInstruction* instruction);
 
 RT::Instruction* my_disass_function(const RT::BinaryRegion& binaryRegion, const int64_t& address) {
 	// ... Test
@@ -22,7 +22,7 @@ RT::Instruction* my_disass_function(const RT::BinaryRegion& binaryRegion, const 
 	case INSTRUCTION_TYPE_RET:
 		ret_instruction = new RT::HijackFlowInstruction(size);
 		//RT::ReferencingInstruction* referencing_instruction = static_cast<RT::HijackFlowInstruction*>(ret_instruction);
-		compute_referenced_address(inst, static_cast<RT::HijackFlowInstruction*>(ret_instruction));
+		compute_referenced_address(inst, address, static_cast<RT::HijackFlowInstruction*>(ret_instruction));
 		
 		//std::cout << "Referenced address: " << static_cast<RT::HijackFlowInstruction*>(ret_instruction)->referencedAddress() << std::endl;
 		break;
@@ -30,8 +30,7 @@ RT::Instruction* my_disass_function(const RT::BinaryRegion& binaryRegion, const 
 	case INSTRUCTION_TYPE_JMPC: // Conditional jump
 	case INSTRUCTION_TYPE_CALL:
 		ret_instruction = new RT::FlowInstruction(size);
-		
-		compute_referenced_address(inst, static_cast<RT::HijackFlowInstruction*>(ret_instruction));
+		compute_referenced_address(inst, address, static_cast<RT::HijackFlowInstruction*>(ret_instruction));
 		break;
 	
 	// TODO: cases for ReferencingInstruction
@@ -49,8 +48,8 @@ RT::Instruction* my_disass_function(const RT::BinaryRegion& binaryRegion, const 
 	return ret_instruction;
 }
 
-void compute_referenced_address(const INSTRUCTION& inst, RT::ReferencingInstruction* instruction) {
+void compute_referenced_address(const INSTRUCTION& inst, const int64_t& base_address, RT::ReferencingInstruction* instruction) {
 	if(inst.op1.type == OPERAND_TYPE_IMMEDIATE) {
-		instruction->setReferencedAddress(inst.op1.immediate);
+		instruction->setReferencedAddress(inst.op1.immediate + base_address + inst.length); 
 	}
 }
