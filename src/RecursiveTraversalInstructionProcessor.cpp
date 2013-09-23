@@ -18,11 +18,11 @@ namespace RecursiveTraversal {
 	}
 	
 	RecursiveTraversalInstructionProcessor::~RecursiveTraversalInstructionProcessor() {
-		/*
-		if(m_currentBinaryBlock != NULL) {
-			delete m_currentBinaryBlock;
-		}
-		*/
+		
+		// if(m_currentBinaryBlock != NULL) {
+			// delete m_currentBinaryBlock;
+		// }
+		
 	}
 		
 
@@ -41,6 +41,7 @@ namespace RecursiveTraversal {
 		
 		// if the destination address hasn't been analysed yet, record it for further analysis
 		if(!isAddressWithinBlocks(instruction.referencedAddress())) {
+			std::cout << "Record " << instruction.referencedAddress() << "for further analysis. " << std::endl;
 			pushAddressToDisassemble(instruction.referencedAddress());
 		}
 		
@@ -50,13 +51,31 @@ namespace RecursiveTraversal {
 	void RecursiveTraversalInstructionProcessor::processHijackFlowInstruction(const HijackFlowInstruction& instruction) {
 		m_currentBinaryBlock->incrementLength(instruction.length());
 		
-		// if the destination address hasn't been analysed yet, start a new block
-		std::cout << "Referenced Address:" << instruction.referencedAddress() << std::endl;
-		if(!isAddressWithinBlocks(instruction.referencedAddress())) {
-			std::cout << "Insert a new block." << std::endl;
-			m_binaryBlocks->insert(m_currentBinaryBlock);
-			m_currentBinaryBlock = new BinaryCodeBlock(instruction.referencedAddress(), 0);
-			setCurrentAddressToDisassemble(instruction.referencedAddress());
+		// Save the current block
+		m_binaryBlocks->insert(m_currentBinaryBlock);
+		
+		/* Not a ret instruction? (ugly) */
+		if(!instruction.isRet()) {
+		
+			// if the destination address hasn't been analysed yet, start a new block
+			std::cout << "Referenced Address:" << instruction.referencedAddress() << std::endl;
+			if(!isAddressWithinBlocks(instruction.referencedAddress())) {
+				std::cout << "Insert a new block." << std::endl;
+				
+				m_currentBinaryBlock = new BinaryCodeBlock(instruction.referencedAddress(), 0);
+				setCurrentAddressToDisassemble(instruction.referencedAddress());
+			}
+			
+		} else {
+			// Pop last address & start a new block
+			if(m_addressesToDisassemble.size() >= 1) {
+				int64_t address = popLastAddressToDisassemble();
+				
+				m_currentBinaryBlock = new BinaryCodeBlock(address, 0);
+				setCurrentAddressToDisassemble(address);
+			} else {
+			
+			}
 		}
 	}
 	

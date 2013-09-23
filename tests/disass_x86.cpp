@@ -22,6 +22,9 @@ RT::Instruction* my_disass_function(const RT::BinaryRegion& binaryRegion, const 
 	case INSTRUCTION_TYPE_JMP:
 	case INSTRUCTION_TYPE_RET:
 		ret_instruction = new RT::HijackFlowInstruction(size);
+		if(inst.type == INSTRUCTION_TYPE_RET) {
+			static_cast<RT::HijackFlowInstruction*>(ret_instruction)->setIsRet(true);
+		}
 		//RT::ReferencingInstruction* referencing_instruction = static_cast<RT::HijackFlowInstruction*>(ret_instruction);
 		compute_referenced_address(inst, address, static_cast<RT::HijackFlowInstruction*>(ret_instruction));
 		

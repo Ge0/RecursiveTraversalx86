@@ -35,9 +35,19 @@ int main(int argc, char** argv) {
 	//my_disass_function(binaryRegion, 0);
 	analyze_binary_region(binaryRegion, binaryBlocks);
 	
+	binaryBlocks.clear();
 	
-	my_disass_function(binaryRegion, 0);
+	binaryRegion.setContent(
+		"\x55\x89\xE5\x3E\x8B\x45\x08\x3E\x03\x45\x0c\xc9\xc3\x12\x23\x45"
+		"\x67\x8A\xBC\xDE\xF7\x84\x51\x65\x48\x60\x55\x8B\xEC\x6A\x04\x6A"
+		"\x02\xE8\xDC\xFF\xFF\xFF\x50\x68\x00\x20\x40\x00\xFF\x15\x00\x00"
+		"\x40\x00\xC9\xC3",
+		52
+	);
 	
+	binaryRegion.setEntryPointOffset(26);
+	
+	analyze_binary_region(binaryRegion, binaryBlocks);
 	return EXIT_SUCCESS;
 	
 }
@@ -124,6 +134,9 @@ void dump_binary_blocks(const std::set<RT::BinaryBlock*,RT::binary_block_compare
 		*/
 		
 		std::cout << "0x" << std::hex << (*it)->address() << " " << std::dec << (*it)->length() << " byte(s)" << std::endl;
+		
+		// No memory leak =)
+		delete *it;
 		
 		++it;
 	}
