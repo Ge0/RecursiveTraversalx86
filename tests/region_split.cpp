@@ -15,13 +15,13 @@
 //#include <libdasm.h>
 namespace RT = RecursiveTraversal;
 
-bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*>& binaryBlocks);
+bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*, RT::binary_block_compare>& binaryBlocks);
 
 bool is_address_within_binary_region(const RT::BinaryRegion& binaryRegion, const int64_t& address);
 
-void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::BinaryBlock*>& binaryBlocks);
+void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::BinaryBlock*, RT::binary_block_compare>& binaryBlocks);
 
-void dump_binary_blocks(const std::set<RT::BinaryBlock*>& binary_blocks);
+void dump_binary_blocks(const std::set<RT::BinaryBlock*, RT::binary_block_compare>& binary_blocks);
 
 int main(int argc, char** argv) {
 	RT::BinaryRegion binaryRegion(
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
 		"\x50\x8B\xD9\xEB\x01\xDE\x83\xF2\x43",
 		9
 	);
-	std::set<RT::BinaryBlock*> binaryBlocks;
+	std::set<RT::BinaryBlock*, RT::binary_block_compare> binaryBlocks;
 	//my_disass_function(binaryRegion, 0);
 	analyze_binary_region(binaryRegion, binaryBlocks);
 	
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
 	
 }
 
-void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::BinaryBlock*>& binaryBlocks) {
+void analyze_binary_region(const RT::BinaryRegion& binaryRegion, std::set<RT::BinaryBlock*,RT::binary_block_compare>& binaryBlocks) {
 
 
 	RT::RecursiveTraversalInstructionProcessor processor(
@@ -98,7 +98,7 @@ bool is_address_within_binary_region(const RT::BinaryRegion& binaryRegion, const
 	return address >= binaryRegion.baseAddress() && address < binaryRegion.baseAddress() + binaryRegion.contentSize();
 }
 
-bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*>& binaryBlocks) {
+bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*,RT::binary_block_compare>& binaryBlocks) {
 	std::set<RT::BinaryBlock*>::const_iterator it = binaryBlocks.begin();
 	bool match = false;
 	
@@ -111,7 +111,7 @@ bool is_address_within_blocks(const int64_t& address, std::set<RT::BinaryBlock*>
 }
 
 
-void dump_binary_blocks(const std::set<RT::BinaryBlock*>& binary_blocks) {
+void dump_binary_blocks(const std::set<RT::BinaryBlock*,RT::binary_block_compare>& binary_blocks) {
 	std::set<RT::BinaryBlock*>::const_iterator it = binary_blocks.begin();
 	
 	while(it != binary_blocks.end()) {

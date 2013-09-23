@@ -63,7 +63,7 @@ namespace RecursiveTraversal {
 	bool RecursiveTraversalInstructionProcessor::isAddressWithinBlocks(const int64_t& address) const {
 		bool match = false;
 		if(m_binaryRegion->hasAddress(address)) {
-			std::set<BinaryBlock*>::const_iterator it = m_binaryBlocks->begin();
+			std::set<BinaryBlock*,binary_block_compare>::const_iterator it = m_binaryBlocks->begin();
 			
 			
 			while(!match && it != m_binaryBlocks->end()) {
@@ -89,7 +89,7 @@ namespace RecursiveTraversal {
 		m_currentAddress += offset;
 	}
 	
-	void RecursiveTraversalInstructionProcessor::setBinaryBlocks(std::set<BinaryBlock*>* const& binary_blocks) {
+	void RecursiveTraversalInstructionProcessor::setBinaryBlocks(std::set<BinaryBlock*,binary_block_compare>* const& binary_blocks) {
 		m_binaryBlocks = binary_blocks;
 	}
 
@@ -114,7 +114,7 @@ namespace RecursiveTraversal {
 		if(m_binaryBlocks->size() > 1) {
 			
 			// fill the set with binary data blocks
-			std::set<BinaryBlock*>::const_iterator it_prev = m_binaryBlocks->begin(), it = it_prev;
+			std::set<BinaryBlock*,binary_block_compare>::const_iterator it_prev = m_binaryBlocks->begin(), it = it_prev;
 			++it;
 			
 			while(it != m_binaryBlocks->end()) {
@@ -124,17 +124,19 @@ namespace RecursiveTraversal {
 				// not contiguous?
 				if(((*it_prev)->address() + (*it_prev)->length()) != (*it)->address()) {
 					// Create a new binary data block that fits in
+					std::cout << "New binary block: ";
 					BinaryDataBlock* data_block = new BinaryDataBlock(
 						(*it_prev)->address() + (*it)->length(), // computed address
 						(*it)->address() - ((*it_prev)->address() + (*it_prev)->length()) // computed length
 					);
+					std::cout << std::hex << data_block->address() << " " << std::dec << data_block->length() << " bytes." << std::endl;
 					std::cout << "Before: " << (*it_prev)->address() << std::endl;
 					// Insert the block into the set
 					it_prev = m_binaryBlocks->insert(it_prev,data_block);
 					std::cout << "After: " << (*it_prev)->address() << std::endl;
 					// update the prev_it iterator so it points right to the new block
 					// ++it_prev;
-					++it;
+					// ++it;
 				}
 			
 				++it_prev;

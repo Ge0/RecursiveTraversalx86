@@ -37,7 +37,7 @@ namespace RecursiveTraversal {
 		}
 		
 
-		inline std::set<BinaryBlock*>* const& binaryBlocks() const {
+		inline std::set<BinaryBlock*,binary_block_compare>* const& binaryBlocks() const {
 			return m_binaryBlocks;
 		}
 		
@@ -46,7 +46,7 @@ namespace RecursiveTraversal {
 		void incrementCurrentAddress(int offset);
 		void setCurrentAddressToDisassemble(const int64_t&);
 		void setBinaryRegion(const BinaryRegion* const& binaryRegion);
-		void setBinaryBlocks(std::set<BinaryBlock*>* const& binary_blocks);
+		void setBinaryBlocks(std::set<BinaryBlock*, binary_block_compare>* const& binary_blocks);
 		int64_t popLastAddressToDisassemble();
 			
 	private:
@@ -56,7 +56,7 @@ namespace RecursiveTraversal {
 		BinaryBlock* m_currentBinaryBlock;
 		const BinaryRegion* m_binaryRegion;
 		std::stack<int64_t> m_addressesToDisassemble;
-		std::set<BinaryBlock*>* m_binaryBlocks;
+		std::set<BinaryBlock*,binary_block_compare>* m_binaryBlocks;
 		int64_t m_currentAddress;
 	};
 }

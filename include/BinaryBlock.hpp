@@ -33,6 +33,16 @@ namespace RecursiveTraversal {
 		int64_t m_address;
 		size_t m_length;
 	};
+	
+	struct binary_block_compare {
+		bool operator() (BinaryBlock* b1, BinaryBlock* b2) {
+			return b1->address() < b2->address();
+		}
+	};
+	
+	
 }
+
+
 
 #endif /* _BINARYBLOCK_HPP_ */
